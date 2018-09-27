@@ -11,7 +11,6 @@ const whiteList = ['/login', '/protocol'];
  * next: 必须执行的方法,决定执行效果
  */
 router.beforeEach((to, from, next) => {
-	
 	if (getToken()) {    //有token
 		next()
 	} else {							//无token

@@ -3,13 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export const routerMap = [
-	{ path: '/', component: () => import('@/views/home/index'), meta: { title: '电子发票' }},
-	
+export const routerMap = [	
 	{ path: '/login', component: () => import('@/views/login/index'), meta: { title: '登录' }},
 	{ path: '/protocol', component: () => import('@/views/login/userProtocol'), meta: { title: '车享享用户协议' }},
 	
-	{ path: '/order', component: () => import('@/views/order/index'), meta: { title: '停车订单' }},
+	{ path: '/', component: () => import('@/views/order/index'), meta: { title: '停车订单' }},
 	
 	{ path: '/record', component: () => import('@/views/record/index'), meta: { title: '开票历史' }},
 	
