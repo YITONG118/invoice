@@ -41,6 +41,7 @@
 				this.$vux.loading.show({
 					text: '登录中...'
 				})
+				setToken('买了否冷')
 				this.$router.replace('/')
 			},
 			getCodeAction() {
