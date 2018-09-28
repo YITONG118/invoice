@@ -14,11 +14,12 @@ import './permission'
 import store from './store'
 
 //全局组件
-import { LoadingPlugin, Cell, Group, XInput, XButton } from 'vux'
+import { LoadingPlugin, ToastPlugin, Cell, Group, XInput, XButton } from 'vux'
 
 Vue.config.productionTip = false
 
 Vue.use(LoadingPlugin)
+Vue.use(ToastPlugin)
 
 Vue.component('cell', Cell)
 Vue.component('group', Group)

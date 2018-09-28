@@ -11,11 +11,15 @@
 		</group>
 		<x-button class="nextBtn" type="primary" :disabled="nextBtnEnable" @click.native="nextAction">下一步</x-button>
 		<label>登录即代表接受<span @click="userProtocolAction">《车享享用户协议》</span></label>
+		<div>
+			<p v-for="i in 100">{{i}}</p>
+		</div>
 	</div>
 </template>
 
 <script>
 	import { getToken, setToken, removeToken } from '@/utils/token'
+	import { request_Login } from '@/request/api'
 	
 	export default {
 		name: 'login',
@@ -34,15 +38,31 @@
 		},
 		methods: {
 			nextAction() {
-				setToken('买了否冷')
 				this.$vux.loading.show({
-					text: '验证码发送成功'
+					text: '登录中...'
 				})
 				this.$router.replace('/')
 			},
 			getCodeAction() {
-				removeToken()
-				console.log('获取验证码')
+				
+				if (this.telephone.length !== 11) {
+					this.$vux.toast.text('请输入正确的手机号码')
+					return
+				}
+					
+				this.$vux.loading.show({
+					text: '发送中...'
+				})
+	
+				request_Login().then((data) => {
+					this.$vux.loading.hide()
+					this.$vux.toast.show({
+						text: '验证码已发送',
+						time: 1000
+					})
+				}).catch((error) => {
+					this.$vux.loading.hide()
+				});
 			},
 			userProtocolAction() {
 				this.$router.push('/protocol')
