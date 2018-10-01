@@ -16,6 +16,9 @@ import store from './store'
 //全局组件
 import { LoadingPlugin, ToastPlugin, Cell, Group, XInput, XButton } from 'vux'
 
+//全局方法
+import { viewBox } from '@/utils'
+
 Vue.config.productionTip = false
 
 Vue.use(LoadingPlugin)
@@ -25,6 +28,8 @@ Vue.component('cell', Cell)
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
 Vue.component('x-button', XButton)
+
+Vue.prototype.viewBox = viewBox
 
 new Vue({
   el: '#app',

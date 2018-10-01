@@ -2,7 +2,7 @@ const app = {
 	// 状态
 	state: {
 		navBarStatus: true,			//是否显示导航栏
-		tabBarStatus: true			//是否显示标签栏
+		tabBarStatus: true 			//是否显示标签栏
 	},
 	
 	// 状态变更（必须是同步函数）

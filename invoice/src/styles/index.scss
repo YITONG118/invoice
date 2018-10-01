@@ -8,8 +8,11 @@
 }
 
 html,
-body {
+body,
+#app,
+.app-container {
     height: 100%;
+    color: $text;
 }
 
 body {

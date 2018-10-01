@@ -21,3 +21,11 @@ router.beforeEach((to, from, next) => {
 		}
 	}
 })
+
+
+//router.afterEach((to, from) => {
+//	console.log(from)
+//	setTimeout(() => {
+//		window.scrollTo(0, 100)
+//	},80)
+//})

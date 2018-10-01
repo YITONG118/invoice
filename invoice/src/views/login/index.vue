@@ -11,9 +11,6 @@
 		</group>
 		<x-button class="nextBtn" type="primary" :disabled="nextBtnEnable" @click.native="nextAction">下一步</x-button>
 		<label>登录即代表接受<span @click="userProtocolAction">《车享享用户协议》</span></label>
-		<div>
-			<p v-for="i in 100">{{i}}</p>
-		</div>
 	</div>
 </template>
 
