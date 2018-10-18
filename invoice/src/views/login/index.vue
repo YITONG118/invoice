@@ -1,21 +1,23 @@
 <template>
 	<div class="login-container">
 		<group gutter="0">
-			<x-input class="telephone" placeholder="请输入手机号码" type="number" @on-change="telephoneChanged" v-model="telephone">
+			<x-input class="telephone" placeholder="请输入手机号码" v-model="telephone">
 				<img slot="label" src="../../img/telephone.png">
 			</x-input>
-			<x-input class="authcode" placeholder="请输入验证码" type="number" @on-change="authcodeChanged" v-model="authcode" :show-clear="false">
+			<x-input class="password" type="password" placeholder="请输入账户密码" v-model="password">
 				<img slot="label" src="../../img/code.png">
-				<x-button class="getCodeBtn" slot="right" @click.native="getCodeAction">获取验证码</x-button>
 			</x-input>
 		</group>
-		<x-button class="nextBtn" type="primary" :disabled="nextBtnEnable" @click.native="nextAction">下一步</x-button>
-		<label>登录即代表接受<span @click="userProtocolAction">《车享享用户协议》</span></label>
+		<div class="others">
+			<label class="forgetPassword" @click="$router.push('/password/findPassword')">忘记密码?</label>
+			<label class="register" @click="$router.push('/password/register')">新用户注册</label>
+		</div>
+		<x-button class="loginBtn" type="primary" :disabled="loginBtnEnable" @click.native="login">登 录</x-button>
+		<label class="userProtocol">登录即代表接受<span @click="$router.push('/protocol')">《车享享用户协议》</span></label>
 	</div>
 </template>
 
 <script>
-	import { getToken, setToken, removeToken } from '@/utils/token'
 	import { request_Login } from '@/request/api'
 	
 	export default {
@@ -23,54 +25,35 @@
 		data() {
 			return {
 				telephone: '',
-				authcode: '',
-				telephoneEnable: false,
-				authcodeEnable: false
+				password: ''
 			}
-		},
+		}, 
 		computed: {
-			nextBtnEnable() {
-				return !(this.telephoneEnable && this.authcodeEnable)
+			loginBtnEnable() {
+				return !(this.telephone.length > 0 && this.password.length > 0)
 			}
 		},
 		methods: {
-			nextAction() {
+			login() {
 				this.$vux.loading.show({
 					text: '登录中...'
 				})
-				setToken('买了否冷')
-				this.$router.replace('/')
-			},
-			getCodeAction() {
 				
-				if (this.telephone.length !== 11) {
-					this.$vux.toast.text('请输入正确的手机号码')
-					return
-				}
-					
-				this.$vux.loading.show({
-					text: '发送中...'
-				})
-	
-				request_Login().then((data) => {
+				request_Login(this.telephone, this.password).then((userInfo) => {
 					this.$vux.loading.hide()
-					this.$vux.toast.show({
-						text: '验证码已发送',
-						time: 1000
-					})
+					this.$store.dispatch('login', Object.assign(userInfo, {phone: this.telephone}))
+					this.$router.replace('/')
 				}).catch((error) => {
 					this.$vux.loading.hide()
-				});
-			},
-			userProtocolAction() {
-				this.$router.push('/protocol')
-			},
-			telephoneChanged() {
-				return this.telephoneEnable = this.telephone.length === 11
-			},
-			authcodeChanged() {
-				return this.authcodeEnable = this.authcode.length === 6
+				})
 			}
+		},
+		beforeRouteLeave(to, from, next) {
+	  		//刷新将要的进入页面,而不是进入缓存的页面
+	  		this.$store.dispatch('add_noCachedRouter', 'order')				
+			this.$store.dispatch('set_noCachedOrderRoute')						 	
+			this.$store.dispatch('add_noCachedRouter', 'record') 
+			next()
 		}
 	}
 </script>
@@ -84,24 +67,30 @@
 				margin-right: 13px;
 			}
 		}
-		.authcode {
+		.password {
 			height: 60px;
 			img {
 				width: 15px;
 				margin-right: 10px;
 			}
-			.getCodeBtn {
-				background-color: $orange;
-				font-size: 15px;
+		}
+		.loginBtn {
+			width: calc(100% - (#{$margin}) * 2);
+		}
+		.others {
+			padding: 12px $margin;
+			.register,
+			.forgetPassword {
+				display: inline-block;
+				height: 30px;
+				line-height: 30px;
+				color: $blue;
+			}
+			.register {
+				float: right;
 			}
 		}
-		
-		.nextBtn {
-			width: calc(100% - (#{$margin} * 2));
-			margin-top: 50px;
-		}	
-		
-		label {
+		.userProtocol {
 			display: block;
 			text-align: center;
 			margin-top: 20px;
@@ -112,4 +101,4 @@
 		}
 	}
 </style>
-
+	

@@ -2,7 +2,7 @@ import router from './router'
 import { getToken } from '@/utils/token'
 
 //免登录白名单
-const whiteList = ['/login', '/protocol'];
+const whiteList = ['/login', '/protocol', '/password/register', '/password/findPassword'];
 
 /*
  * 全局前置守卫
@@ -21,11 +21,3 @@ router.beforeEach((to, from, next) => {
 		}
 	}
 })
-
-
-//router.afterEach((to, from) => {
-//	console.log(from)
-//	setTimeout(() => {
-//		window.scrollTo(0, 100)
-//	},80)
-//})

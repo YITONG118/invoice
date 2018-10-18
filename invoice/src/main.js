@@ -14,7 +14,7 @@ import './permission'
 import store from './store'
 
 //全局组件
-import { LoadingPlugin, ToastPlugin, Cell, Group, XInput, XButton } from 'vux'
+import { TransferDom, LoadingPlugin, ToastPlugin, ConfirmPlugin, AlertPlugin, Cell, Group, XInput, XButton } from 'vux'
 
 //全局方法
 import { viewBox } from '@/utils'
@@ -23,22 +23,28 @@ Vue.config.productionTip = false
 
 Vue.use(LoadingPlugin)
 Vue.use(ToastPlugin)
+Vue.use(ConfirmPlugin)
+Vue.use(AlertPlugin)
+
+Vue.use(require('vue-wechat-title'))				//微信网页标题设置
 
 Vue.component('cell', Cell)
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
 Vue.component('x-button', XButton)
 
-Vue.prototype.viewBox = viewBox
+Vue.directive('transfer-dom', TransferDom)			//全局指令
+
+Vue.prototype.viewBox = viewBox								//全局方法
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  components: { App },
-  template: '<App/>'
+	el: '#app',
+	router,
+	store,
+	components: { App },
+	template: '<App/>'
 })
 
 //移除移动端页面点击延迟
-//const FastClick = require('fastclick')
-//FastClick.attach(document.body)
+const FastClick = require('fastclick')
+FastClick.attach(document.body)
