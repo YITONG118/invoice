@@ -19,8 +19,8 @@
 	  		...mapGetters(['homePath'])
 	  },
 	  beforeRouteLeave(to, from, next) {
-	  		//刷新将要的进入页面,而不是进入缓存的页面
-	  		this.$store.dispatch('add_noCachedRouter', 'order')				//无论进入哪个页面刷新订单页面
+	  	//刷新将要的进入页面,而不是进入缓存的页面
+	  	this.$store.dispatch('add_noCachedRouter', 'order')				//无论进入哪个页面刷新订单页面
 			this.$store.dispatch('set_noCachedOrderRoute')						 	//由于还有子路由，子路由也要刷新
 			this.$store.dispatch('add_noCachedRouter', 'record')      	//无论进入哪个页面刷新历史记录页面
 			next()

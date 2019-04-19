@@ -151,7 +151,7 @@
 			this.scrollOffset = this.viewBox(this).getScrollTop()
 	  		if (to.params.type === 'edit' && !to.params.templateId) {
 	  			//需要将历史记录返回到modelList
-				this.$router.go(-1)
+					this.$router.go(-1)
 	  			return
 	  		}
 	  		next()

@@ -36,7 +36,7 @@
 			<x-button class="moreInfo-sureBtn" type="primary" @click.native="showMoreInfo = false">确 定</x-button>
 		</popup>
 	
-		<!--核查信息弹窗:不能使用v-model绑定数据，否则会导致移动端没输入一个字符而失去焦点-->
+		<!--核查信息弹窗:不能使用v-model绑定数据，否则会导致移动端每输入一个字符而失去焦点-->
 		<popup class="verifyInfo" v-model="showVerifyInfo" :hide-on-blur="false">
 			<div class="verifyInfo-tool">
 				开具电子发票
@@ -255,7 +255,7 @@
 					position: absolute;
 					left: $margin;
 					top: 50%;
-    				transform: translateY(-50%);
+    			transform: translateY(-50%);
 					width: 30px;
 					height: 30px;
 					img {

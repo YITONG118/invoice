@@ -82,7 +82,7 @@
 				mescrollDown: {},
 				mescrollUp: {
 					callback: this.upCallback,
-					moMoreSize: 1,
+					noMoreSize: 1,
 					page: {
 						num: 0	,		//当前页，回调之前会加1
 						size: 10
