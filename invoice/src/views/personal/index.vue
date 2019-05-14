@@ -75,7 +75,7 @@
 		    </group>
 			</div>
 			
-			<x-button class="logoutBtn" type="primary" @click.native="logoutAction">退出登陆</x-button>
+			<x-button class="logoutBtn" type="primary" @click.native="logoutAction">退出登录</x-button>
 		</div>
 	</div>
 </template>
